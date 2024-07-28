@@ -2,14 +2,16 @@ package main
 
 import (
 	"github.com/gin-gonic/gin"
+	"net/http"
+	"os"
 )
 
 func main() {
 	gi := gin.Default()
 	gi.Use(handleCors())
 	gi.GET("/", handleRoot)
-	//addr := os.Getenv("HOST_ADDR")
-	//addr = "0.0.0.0:9000"
+	addr := os.Getenv("HOST_ADDR")
+	panic(http.ListenAndServe(addr, gi))
 }
 
 func handleCors() gin.HandlerFunc {
